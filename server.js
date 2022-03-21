@@ -5,7 +5,7 @@ let bodyParser = require("body-parser");
 let dbConfig = require("./database/db");
 
 // Express Route
-const movieRoute = require("../backend/routes/movie.route");
+const movieRoute = require("./routes/movie.route");
 
 // Configure mongoDB Database
 // mongoose.set("useNewUrlParser", true);
