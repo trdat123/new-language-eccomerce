@@ -5,21 +5,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieForm from "../components/MovieForm";
 import { useParams } from "react-router-dom";
+import { Typography } from "@mui/material";
 // EditMovie Component
 const EditMovie = (props: any) => {
-  let params = useParams();
+  // let params = useParams();
+  let { id } = useParams();
   const [formValues, setFormValues] = useState({
     name: "",
     year: "",
     rating: "",
+    description: "",
+    image: "",
+    video: "",
   });
   //onSubmit handler
   const onSubmit = (movieObject: any) => {
     axios
-      .put(
-        "http://localhost:4000/movies/update_movie/" + params.id,
-        movieObject
-      )
+      .put(`http://localhost:4000/movies/update_movie/${id}`, movieObject)
       .then((res) => {
         if (res.status === 200) {
           alert("Movie successfully updated");
@@ -32,18 +34,25 @@ const EditMovie = (props: any) => {
   // Load data from server and reinitialize movie form
   useEffect(() => {
     axios
-      .get("http://localhost:4000/movies/update_movie/" + params.id)
+      .get(`http://localhost:4000/movies/update_movie/${id}`)
       .then((res) => {
-        const { name, year, rating } = res.data;
+        const { name, year, rating, description, image, video } = res.data;
         console.log(res.data);
-        setFormValues({ name, year, rating });
+        setFormValues({ name, year, rating, description, image, video });
       })
       .catch((err) => console.log(err));
   }, []);
   // Return movie form
   return (
     <React.Fragment>
-      <div>Hello Edit</div>
+      <Typography
+        variant="h3"
+        component="h2"
+        align="center"
+        sx={{ mt: 4, mb: 1 }}
+      >
+        Update Movie : {formValues.name}
+      </Typography>
       <MovieForm
         initialValues={formValues}
         onSubmit={onSubmit}
