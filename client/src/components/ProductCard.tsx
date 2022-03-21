@@ -9,24 +9,25 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useEffect, useState } from "react";
-import { Snackbar } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
+import PreviewIcon from "@mui/icons-material/Preview";
 import InputBase from "@mui/material/InputBase";
+import { Paper } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 0.6),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.35),
+    backgroundColor: alpha(theme.palette.common.white, 0.8),
   },
+  marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(3),
     width: "auto",
   },
 }));
@@ -49,45 +50,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "7ch",
-      "&:focus": {
-        width: "10ch",
-      },
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
     },
   },
 }));
+
 const ProductCard = () => {
   const [movies, setMovies] = useState([]);
-  const [open, setOpen] = useState(false);
   const [searchTerm, setSearhTerm] = useState("");
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const action = (
-    <React.Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
+  const handleClick = () => {};
 
   useEffect(() => {
     console.log("inside useeffect");
@@ -100,72 +72,65 @@ const ProductCard = () => {
 
   return (
     <React.Fragment>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search"
-          inputProps={{ "aria-label": "search" }}
-          onChange={(e) => setSearhTerm(e.target.value.toLowerCase())}
-        />
-      </Search>
-      <Grid container spacing={2}>
-        {movies
-          .filter((val) => {
-            if (searchTerm == "") {
-              return val;
-            } else if (
-              val.name.toLowerCase().includes(searchTerm.toLowerCase())
-            ) {
-              return val;
-            }
-          })
-          .map((movie, index) => (
-            <Grid
-              item
-              xs={3}
-              key={index}
-              style={{ paddingRight: 16, paddingBottom: 16 }}
-            >
-              <Card sx={{ maxWidth: 250 }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image="https://source.unsplash.com/random"
-                    alt="random card"
-                  />
-                  <CardContent>
-                    <Typography variant="h6">{movie.name}</Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {movie.rating}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
+      <Paper elevation={3} sx={{ mb: 3, width: 260 }}>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+            onChange={(e) => setSearhTerm(e.target.value.toLowerCase())}
+          />
+        </Search>
+      </Paper>
+
+      <Grid container spacing={3}>
+        {movies.map((movie, index) => (
+          <Grid item md={3} xs={6} key={index} style={{ paddingBottom: 16 }}>
+            <Card sx={{ maxWidth: 260 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="360"
+                  image={movie["image"]}
+                  alt="random card"
+                />
+                <CardContent>
+                  <Typography variant="h6">{movie["name"]}</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {movie["rating"]}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <Button
+                  size="small"
+                  color="primary"
+                  variant="contained"
+                  onClick={handleClick}
                 >
-                  <Button
-                    size="small"
-                    color="primary"
-                    variant="contained"
-                    onClick={handleClick}
+                  <Link
+                    to={`/detail/${movie["_id"]}`}
+                    style={{ textDecoration: "none", color: "white" }}
                   >
-                    <AddShoppingCartIcon />
-                    Add to cart
-                  </Button>
-                  <Snackbar
-                    open={open}
-                    autoHideDuration={2000}
-                    onClose={handleClose}
-                    message="Note archived"
-                    action={action}
-                  />
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
+                    <span>View</span>
+                  </Link>
+                </Button>
+                <Button
+                  size="small"
+                  color="primary"
+                  variant="contained"
+                  onClick={handleClick}
+                >
+                  Add to cart
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
     </React.Fragment>
   );

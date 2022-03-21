@@ -5,51 +5,44 @@ import { styled } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import ReactPlayer from "react-player/youtube";
 
 const ProductDetail = () => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState({
+    name: "",
+    year: "",
+    rating: "",
+    description: "",
+    image: "",
+    video: "",
+  });
+  const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
     console.log("inside useeffect");
-    fetch("http://localhost:8000/")
-      .then((res) => res.json())
-      .then((data) => {
-        setMovies(data);
-      });
-  }, []);
-
+    axios
+      .get(`http://localhost:4000/movies/update_movie/${id}`)
+      .then((res) => {
+        const { name, year, rating, description, image, video } = res.data;
+        console.log(res.data);
+        setMovies({ name, year, rating, description, image, video });
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
   return (
-    <Container>
-      <Grid container spacing={0}>
-        <Grid item xs={5}>
-          <Box
-            sx={{
-              height: 400,
-              backgroundColor: "primary.dark",
-              "&:hover": {
-                backgroundColor: "primary.main",
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-          ></Box>
-        </Grid>
-        <Grid item xs={7}>
-          <Box
-            sx={{
-              height: 400,
-              backgroundColor: "primary.dark",
-              "&:hover": {
-                backgroundColor: "primary.main",
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-          ></Box>
-        </Grid>
-        <Grid item xs={12}>
-          <Box></Box>
-        </Grid>
-      </Grid>
-    </Container>
+    <React.Fragment>
+      <h2>detail page</h2>
+      <div>Name: {movies.name}</div>
+      <div>Year: {movies.year}</div>
+      <div>Rating: {movies.rating}</div>
+      <div>Description: {movies.description}</div>
+      <img src={movies.image} />
+      <div>Trailer</div>
+      <ReactPlayer controls={true} url={movies.video} />
+    </React.Fragment>
   );
 };
 
