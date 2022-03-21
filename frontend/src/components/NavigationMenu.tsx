@@ -12,6 +12,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
+import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -47,11 +48,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "7ch",
+      "&:focus": {
+        width: "10ch",
+      },
     },
   },
 }));
-const pages = ["Products", "Pricing", "Blog"];
+const pages = [
+  { key: 1, name: "Home", route: "home" },
+  { key: 2, name: "Create", route: "create_movie" },
+  { key: 3, name: "List", route: "movie_list" },
+];
 
 const NavigationMenu = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -77,19 +85,56 @@ const NavigationMenu = () => {
   };
 
   return (
-    <AppBar position="static" color="primary" sx={{ mb: 1 }}>
+    <AppBar position="static" color="primary">
       <Container maxWidth="xl">
-        <Toolbar>
+        <Toolbar sx={{ paddingRight: 1, paddingLeft: 1 }}>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
+            <Link to={"/"}>LOGO</Link>
+          </Typography>
+
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+          >
             LOGO
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page.key}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={`${page.route}`}
+                >
+                  {page.name}
+                </Link>
+              </Button>
+            ))}
+          </Box>
+
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search"
+              inputProps={{ "aria-label": "search" }}
+              onChange={(e) => console.log(e.target.value.toLowerCase())}
+            />
+          </Search>
+
+          <Box sx={{ float: "left", display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -110,7 +155,7 @@ const NavigationMenu = () => {
               keepMounted
               transformOrigin={{
                 vertical: "top",
-                horizontal: "left",
+                horizontal: "center",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -119,45 +164,22 @@ const NavigationMenu = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.key} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "#1976d2",
+                      }}
+                      to={`${page.route}`}
+                    >
+                      {page.name}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
-            LOGO
-          </Typography>
-          
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-
-
         </Toolbar>
       </Container>
     </AppBar>
