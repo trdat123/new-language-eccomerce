@@ -12,6 +12,15 @@ let movieSchema = new Schema(
     rating: {
       type: Number,
     },
+    description: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
+    video: {
+      type: String,
+    },
   },
   {
     collection: "movies",

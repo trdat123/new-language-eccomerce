@@ -19,8 +19,10 @@ const MovieForm = (props: any) => {
       .positive("Invalid rating number")
       .integer("Invalid rating number")
       .required("Required"),
+    description: Yup.string(),
+    image: Yup.string().url(),
+    video: Yup.string().url().required("Required"),
   });
-  console.log(props);
 
   return (
     <Box
@@ -29,18 +31,15 @@ const MovieForm = (props: any) => {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        mt: 10,
+        mt: 1,
       }}
     >
-      <Typography variant="h3" component="h2">
-        Create movie
-      </Typography>
       <Formik {...props} validationSchema={validationSchema}>
         <Form>
           <Typography variant="h6" component="h2">
             Movie name
           </Typography>
-          <Field name="name" type="text" />
+          <Field name="name" type="text" placeholder="Enter movie" />
           <ErrorMessage
             name="name"
             className="d-block invalid-feedback"
@@ -50,7 +49,7 @@ const MovieForm = (props: any) => {
           <Typography variant="h6" component="h2">
             Year
           </Typography>
-          <Field name="year" type="text" />
+          <Field name="year" type="text" placeholder="Enter year" />
           <ErrorMessage
             name="year"
             className="d-block invalid-feedback"
@@ -60,9 +59,43 @@ const MovieForm = (props: any) => {
           <Typography variant="h6" component="h2">
             Rating
           </Typography>
-          <Field name="rating" type="number" />
+          <Field name="rating" type="number" placeholder="Enter rating" />
           <ErrorMessage
             name="rating"
+            className="d-block invalid-feedback"
+            component="span"
+          />
+          <br />
+          <Typography variant="h6" component="h2">
+            Description
+          </Typography>
+          <Field
+            name="description"
+            type="text"
+            placeholder="Enter description"
+          />
+          <ErrorMessage
+            name="description"
+            className="d-block invalid-feedback"
+            component="span"
+          />
+          <br />
+          <Typography variant="h6" component="h2">
+            Image
+          </Typography>
+          <Field name="image" type="text" placeholder="Enter image url" />
+          <ErrorMessage
+            name="image"
+            className="d-block invalid-feedback"
+            component="span"
+          />
+          <br />
+          <Typography variant="h6" component="h2">
+            Video
+          </Typography>
+          <Field name="video" type="text" placeholder="Enter video url" />
+          <ErrorMessage
+            name="video"
             className="d-block invalid-feedback"
             component="span"
           />

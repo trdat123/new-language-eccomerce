@@ -24,8 +24,12 @@ const MovieTableRow = (props: any) => {
       <td>{year}</td>
       <td>{rating}</td>
       <td>
-        <Link to={"/edit_movie/" + _id}>Edit</Link>
-        <Button onClick={deleteMovie} size="sm" variant="danger">
+        <Button variant="outlined">
+          <Link to={"/edit/" + _id} style={{ textDecoration: "none" }}>
+            Edit
+          </Link>
+        </Button>
+        <Button onClick={deleteMovie} variant="outlined">
           Delete
         </Button>
       </td>
