@@ -2,7 +2,7 @@ name: New Language Ecommerce CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
     branches: [main, develop]
 
@@ -21,10 +21,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm ci
+      - run: npm ci # npm install Node server
       - run: npm run test --if-present
       - name: Install and build client
         working-directory: ./client
-        run: npm ci
-        run: npm run build
-      # - run: npm run build-client
+        run: |
+          npm ci
+          npm run build
