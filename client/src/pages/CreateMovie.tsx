@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieForm from "../components/MovieForm";
+import { Typography } from "@mui/material";
 // CreatMovie Component
 const CreateMovie = () => {
   const [formValues, setFormValues] = useState({
     name: "",
     year: "",
     rating: "",
+    description: "",
+    image: "",
+    video: "",
   });
   // onSubmit handler
   const onSubmit = (movieObject: any) => {
@@ -22,6 +26,14 @@ const CreateMovie = () => {
   //return movie form
   return (
     <React.Fragment>
+      <Typography
+        variant="h3"
+        component="h2"
+        align="center"
+        sx={{ mt: 4, mb: 1 }}
+      >
+        Create Movie
+      </Typography>
       <MovieForm
         initialValues={formValues}
         onSubmit={onSubmit}

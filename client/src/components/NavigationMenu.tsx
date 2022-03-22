@@ -14,51 +14,10 @@ import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.35),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "7ch",
-      "&:focus": {
-        width: "10ch",
-      },
-    },
-  },
-}));
 const pages = [
   { key: 1, name: "Home", route: "home" },
-  { key: 2, name: "Create", route: "create_movie" },
-  { key: 3, name: "List", route: "movie_list" },
+  { key: 2, name: "Create", route: "create" },
+  { key: 3, name: "List", route: "list" },
 ];
 
 const NavigationMenu = () => {
@@ -94,7 +53,9 @@ const NavigationMenu = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            <Link to={"/"}>LOGO</Link>
+            <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
+              LOGO
+            </Link>
           </Typography>
 
           <Typography
@@ -122,17 +83,6 @@ const NavigationMenu = () => {
               </Button>
             ))}
           </Box>
-
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search"
-              inputProps={{ "aria-label": "search" }}
-              onChange={(e) => console.log(e.target.value.toLowerCase())}
-            />
-          </Search>
 
           <Box sx={{ float: "left", display: { xs: "flex", md: "none" } }}>
             <IconButton

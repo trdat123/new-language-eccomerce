@@ -61,6 +61,19 @@ router
     );
   });
 
+router
+  .route("/show_movie/:id")
+  // Get Single movie
+  .get((req, res) => {
+    movieSchema.findById(req.params.id, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json(data);
+      }
+    });
+  });
+
 // Delete Movie
 router.delete("/delete_movie/:id", (req, res, next) => {
   movieSchema.findByIdAndRemove(req.params.id, (error, data) => {
