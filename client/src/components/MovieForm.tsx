@@ -10,14 +10,25 @@ import Box from "@mui/material/Box";
 const MovieForm = (props: any) => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
-
+    price: Yup.number()
+      .positive("Invalid rating number")
+      .integer("Must be integer")
+      .moreThan(0, "Please input price higher than 0")
+      .lessThan(1000000, "Please input rating lower than 1000000")
+      .required("Required"),
+    gerne: Yup.string()
+      .oneOf(["action", "comedy", "sci-fi", "animated", "thriller"])
+      .required("Required"),
     year: Yup.number()
-      .positive("Invalid year number")
       .integer("Invalid year number")
+      .positive("Invalid year number")
+      .moreThan(1980, "Please input year after 1980")
+      .lessThan(2023, "Please input year before 2023")
       .required("Required"),
     rating: Yup.number()
       .positive("Invalid rating number")
-      .integer("Invalid rating number")
+      .moreThan(0, "Please input rating higher than 0")
+      .lessThan(10.1, "Please input rating lower than 10")
       .required("Required"),
     description: Yup.string(),
     image: Yup.string().url(),
@@ -42,6 +53,33 @@ const MovieForm = (props: any) => {
           <Field name="name" type="text" placeholder="Enter movie" />
           <ErrorMessage
             name="name"
+            className="d-block invalid-feedback"
+            component="span"
+          />
+          <br />
+          <Typography variant="h6" component="h2">
+            Price
+          </Typography>
+          <Field name="price" type="number" placeholder="Enter rating" />
+          <ErrorMessage
+            name="price"
+            className="d-block invalid-feedback"
+            component="span"
+          />
+          <br />
+          <Typography variant="h6" component="h2">
+            Gerne
+          </Typography>
+          <Field name="gerne" as="select" placeholder="Choose gerne">
+            <option value="">Please choose a gerne</option>
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="sci-fi">Sci-fi</option>
+            <option value="animated">Animated</option>
+            <option value="thriller">Thriller</option>
+          </Field>
+          <ErrorMessage
+            name="gerne"
             className="d-block invalid-feedback"
             component="span"
           />

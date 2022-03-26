@@ -2,6 +2,8 @@ import React from "react";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
 
 const MovieTableRow = (props: any) => {
   const { _id, name, year, rating } = props.obj;
@@ -19,11 +21,11 @@ const MovieTableRow = (props: any) => {
   };
 
   return (
-    <tr>
-      <td>{name}</td>
-      <td>{year}</td>
-      <td>{rating}</td>
-      <td>
+    <TableRow>
+      <TableCell align="left">{name}</TableCell>
+      <TableCell align="center">{year}</TableCell>
+      <TableCell align="center">{rating}</TableCell>
+      <TableCell align="center">
         <Button variant="outlined">
           <Link to={"/edit/" + _id} style={{ textDecoration: "none" }}>
             Edit
@@ -32,8 +34,8 @@ const MovieTableRow = (props: any) => {
         <Button onClick={deleteMovie} variant="outlined">
           Delete
         </Button>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 export default MovieTableRow;
