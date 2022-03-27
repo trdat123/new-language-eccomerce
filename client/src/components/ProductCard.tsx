@@ -99,7 +99,7 @@ const ProductCard = () => {
                 <CardContent>
                   <Typography variant="h6">{movie["name"]}</Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {movie["rating"]}
+                    {movie["price"]} VND
                   </Typography>
                 </CardContent>
               </CardActionArea>

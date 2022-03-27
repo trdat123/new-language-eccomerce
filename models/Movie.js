@@ -6,6 +6,12 @@ let movieSchema = new Schema(
     name: {
       type: String,
     },
+    price: {
+      type: Number,
+    },
+    gerne: {
+      type: String,
+    },
     year: {
       type: Number,
     },

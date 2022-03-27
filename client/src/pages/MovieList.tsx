@@ -8,7 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import Container from "@mui/material/Container";
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
 
@@ -31,19 +31,21 @@ const MovieList = () => {
 
   return (
     <React.Fragment>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650, width: "90%" }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="right">Name</TableCell>
-              <TableCell align="right">Year</TableCell>
-              <TableCell align="right">Rating</TableCell>
-              <TableCell align="right">Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{DataTable()}</TableBody>
-        </Table>
-      </TableContainer>
+      <Container>
+        <TableContainer>
+          <Table sx={{ minWidth: 650, width: "90%" }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="left">Name</TableCell>
+                <TableCell align="center">Year</TableCell>
+                <TableCell align="center">Rating</TableCell>
+                <TableCell align="center">Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{DataTable()}</TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
     </React.Fragment>
   );
 };

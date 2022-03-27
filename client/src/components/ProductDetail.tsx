@@ -8,10 +8,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReactPlayer from "react-player/youtube";
-
+import Typography from "@mui/material/Typography";
+import Footer from "../components/Footer";
 const ProductDetail = () => {
   const [movies, setMovies] = useState({
     name: "",
+    gerne: "",
+    price: "",
     year: "",
     rating: "",
     description: "",
@@ -26,22 +29,80 @@ const ProductDetail = () => {
     axios
       .get(`http://localhost:4000/movies/update_movie/${id}`)
       .then((res) => {
-        const { name, year, rating, description, image, video } = res.data;
+        const { name, price, gerne, year, rating, description, image, video } =
+          res.data;
         console.log(res.data);
-        setMovies({ name, year, rating, description, image, video });
+        setMovies({
+          name,
+          price,
+          gerne,
+          year,
+          rating,
+          description,
+          image,
+          video,
+        });
       })
       .catch((err) => console.log(err));
   }, [id]);
+
   return (
     <React.Fragment>
-      <h2>detail page</h2>
-      <div>Name: {movies.name}</div>
-      <div>Year: {movies.year}</div>
-      <div>Rating: {movies.rating}</div>
-      <div>Description: {movies.description}</div>
-      <img src={movies.image} />
-      <div>Trailer</div>
-      <ReactPlayer controls={true} url={movies.video} />
+      <Container sx={{ marginTop: "8px" }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ textAlign: "center" }}>
+              <img src={movies.image} width={"400"} height={"500"} />
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box>
+              <Typography variant="h4" component="div" gutterBottom>
+                {movies.name} ({movies.year})
+              </Typography>
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ textAlign: "justify", textJustify: "inter-word" }}
+              >
+                Price: {movies.price} VND
+              </Typography>
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ textAlign: "justify", textJustify: "inter-word" }}
+              >
+                Gerne: {movies.gerne}
+              </Typography>
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ textAlign: "justify", textJustify: "inter-word" }}
+              >
+                Rating: {movies.rating}
+              </Typography>
+              <Typography variant="body1" component="div">
+                Description: {movies.description}
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Typography variant="h5" component="div">
+              Movie trailer
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ReactPlayer controls={true} url={movies.video} />
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+      <Footer />
     </React.Fragment>
   );
 };

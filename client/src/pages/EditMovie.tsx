@@ -12,6 +12,8 @@ const EditMovie = (props: any) => {
   let { id } = useParams();
   const [formValues, setFormValues] = useState({
     name: "",
+    gerne: "",
+    price: "",
     year: "",
     rating: "",
     description: "",
@@ -36,9 +38,19 @@ const EditMovie = (props: any) => {
     axios
       .get(`http://localhost:4000/movies/update_movie/${id}`)
       .then((res) => {
-        const { name, year, rating, description, image, video } = res.data;
+        const { name, price, gerne, year, rating, description, image, video } =
+          res.data;
         console.log(res.data);
-        setFormValues({ name, year, rating, description, image, video });
+        setFormValues({
+          name,
+          price,
+          gerne,
+          year,
+          rating,
+          description,
+          image,
+          video,
+        });
       })
       .catch((err) => console.log(err));
   }, []);
