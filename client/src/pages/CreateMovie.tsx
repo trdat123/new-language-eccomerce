@@ -6,6 +6,8 @@ import { Typography } from "@mui/material";
 const CreateMovie = () => {
   const [formValues, setFormValues] = useState({
     name: "",
+    gerne: "",
+    price: "",
     year: "",
     rating: "",
     description: "",

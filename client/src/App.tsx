@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import CreateMovie from "./pages/CreateMovie";
 import EditMovie from "./pages/EditMovie";
 import MovieList from "./pages/MovieList";
+import Login from "./pages/Login";
 import NavigationMenu from "./components/NavigationMenu";
 import Error from "./pages/Error";
 import ProductDetail from "./components/ProductDetail";
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/create" element={<CreateMovie />} />
         <Route path="/list" element={<MovieList />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/edit/:id" element={<EditMovie />} />
         <Route path="/detail/:id" element={<ProductDetail />} />
         <Route path="*" element={<Error />} />
