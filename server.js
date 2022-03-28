@@ -3,9 +3,10 @@ let mongoose = require("mongoose");
 let cors = require("cors");
 let bodyParser = require("body-parser");
 let dbConfig = require("./database/db");
+require("dotenv").config();
 
 // Express Route
-const movieRoute = require("./routes/movie.route");
+const movieRoute = require("./api/movie.route");
 
 // Configure mongoDB Database
 // mongoose.set("useNewUrlParser", true);
