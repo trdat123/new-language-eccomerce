@@ -14,7 +14,7 @@ const MovieList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/movies/")
+      .get(`http://localhost:${import.meta.env.VITE_BACKEND_PORT}/movies/`)
       .then(({ data }) => {
         setMovies(data);
       })

@@ -2,11 +2,10 @@ let express = require("express");
 let mongoose = require("mongoose");
 let cors = require("cors");
 let bodyParser = require("body-parser");
-let dbConfig = require("../database/db");
 require("dotenv").config();
 
 // Express Route
-const movieRoute = require("./movie.route");
+const movieRoute = require("./api/movie.route");
 
 // Configure mongoDB Database
 // mongoose.set("useNewUrlParser", true);
@@ -16,7 +15,7 @@ const movieRoute = require("./movie.route");
 
 // Connecting MongoDB Database
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db).then(
+mongoose.connect(process.env.MONGO_URL).then(
   () => {
     console.log("Database successfully connected!");
   },

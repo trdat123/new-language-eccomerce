@@ -17,7 +17,7 @@ const CreateMovie = () => {
   // onSubmit handler
   const onSubmit = (movieObject: any) => {
     axios
-      .post("http://localhost:4000/movies/create_movie", movieObject)
+      .post(`http://localhost:${import.meta.env.VITE_BACKEND_PORT}/movies/create_movie`, movieObject)
       .then((res) => {
         if (res.status === 200) alert("Movie successfully created");
         else Promise.reject();
@@ -28,19 +28,10 @@ const CreateMovie = () => {
   //return movie form
   return (
     <React.Fragment>
-      <Typography
-        variant="h3"
-        component="h2"
-        align="center"
-        sx={{ mt: 4, mb: 1 }}
-      >
+      <Typography variant="h3" component="h2" align="center" sx={{ mt: 4, mb: 1 }}>
         Create Movie
       </Typography>
-      <MovieForm
-        initialValues={formValues}
-        onSubmit={onSubmit}
-        enableReinitialize
-      >
+      <MovieForm initialValues={formValues} onSubmit={onSubmit} enableReinitialize>
         Create Movie
       </MovieForm>
     </React.Fragment>
