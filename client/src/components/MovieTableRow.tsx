@@ -10,7 +10,7 @@ const MovieTableRow = (props: any) => {
 
   const deleteMovie = () => {
     axios
-      .delete("http://localhost:4000/movies/delete_movie/" + _id)
+      .delete(`http://localhost:${import.meta.env.VITE_BACKEND_PORT}/movies/delete_movie/` + _id)
       .then((res) => {
         if (res.status === 200) {
           alert("movie successfully deleted");

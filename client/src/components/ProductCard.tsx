@@ -62,8 +62,7 @@ const ProductCard = () => {
   const handleClick = () => {};
 
   useEffect(() => {
-    console.log("inside useeffect");
-    fetch("http://localhost:4000/movies/")
+    fetch(`http://localhost:${import.meta.env.VITE_BACKEND_PORT}/movies/`)
       .then((res) => res.json())
       .then((data) => {
         setMovies(data);
@@ -90,12 +89,7 @@ const ProductCard = () => {
           <Grid item md={3} xs={6} key={index} style={{ paddingBottom: 16 }}>
             <Card sx={{ maxWidth: 260 }}>
               <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="360"
-                  image={movie["image"]}
-                  alt="random card"
-                />
+                <CardMedia component="img" height="360" image={movie["image"]} alt="random card" />
                 <CardContent>
                   <Typography variant="h6">{movie["name"]}</Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -103,28 +97,13 @@ const ProductCard = () => {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <CardActions
-                style={{ display: "flex", justifyContent: "center" }}
-              >
-                <Button
-                  size="small"
-                  color="primary"
-                  variant="contained"
-                  onClick={handleClick}
-                >
-                  <Link
-                    to={`/detail/${movie["_id"]}`}
-                    style={{ textDecoration: "none", color: "white" }}
-                  >
+              <CardActions style={{ display: "flex", justifyContent: "center" }}>
+                <Button size="small" color="primary" variant="contained" onClick={handleClick}>
+                  <Link to={`/detail/${movie["_id"]}`} style={{ textDecoration: "none", color: "white" }}>
                     <span>View</span>
                   </Link>
                 </Button>
-                <Button
-                  size="small"
-                  color="primary"
-                  variant="contained"
-                  onClick={handleClick}
-                >
+                <Button size="small" color="primary" variant="contained" onClick={handleClick}>
                   Add to cart
                 </Button>
               </CardActions>
