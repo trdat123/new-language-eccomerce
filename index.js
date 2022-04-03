@@ -5,7 +5,7 @@ let bodyParser = require("body-parser");
 require("dotenv").config();
 
 // Express Route
-const movieRoute = require("./movie.route");
+const movieRoute = require("./api/movie.route");
 
 // Configure mongoDB Database
 // mongoose.set("useNewUrlParser", true);
@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGO_URL).then(
     console.log("Database successfully connected!");
   },
   (error) => {
-    console.log("Could not connect to database : " + error);
+    console.log("Could not connect to database: " + error);
   }
 );
 
