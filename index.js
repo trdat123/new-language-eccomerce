@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGO_URL).then(
     console.log("Database successfully connected!");
   },
   (error) => {
-    console.log("Could not connect to database : " + error);
+    console.log("Could not connect to database: " + error);
   }
 );
 
@@ -41,9 +41,9 @@ const server = app.listen(port, () => {
 });
 
 // 404 Error
-app.use((req, res, next) => {
-  res.status(404).send("Error 404!");
-});
+// app.use((req, res, next) => {
+//   res.status(404).send("Error 404!");
+// });
 
 app.use(function (err, req, res, next) {
   console.error(err.message);
