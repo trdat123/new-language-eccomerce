@@ -6,6 +6,20 @@ import { FormGroup, FormControl, Typography } from "@mui/material";
 import styled from "@emotion/styled/types/base";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import { borderRadius, boxSizing } from "@mui/system";
+
+const styles = {
+  boxSizing: "border-box",
+  borderRadius: "4px",
+  padding: "6px 10px",
+  marginRight: "4px",
+};
+
+const stylesError = {
+  display: "block",
+  color: "red",
+  marginBottom: "-24px",
+};
 
 const MovieForm = (props: any) => {
   const validationSchema = Yup.object().shape({
@@ -17,7 +31,7 @@ const MovieForm = (props: any) => {
       .lessThan(1000000, "Please input rating lower than 1000000")
       .required("Required"),
     gerne: Yup.string()
-      .oneOf(["action", "comedy", "sci-fi", "animated", "thriller"])
+      .oneOf(["action", "comedy", "sci-fi", "animated", "thriller", "drama"])
       .required("Required"),
     year: Yup.number()
       .integer("Invalid year number")
@@ -31,8 +45,8 @@ const MovieForm = (props: any) => {
       .lessThan(10.1, "Please input rating lower than 10")
       .required("Required"),
     description: Yup.string(),
-    image: Yup.string().url(),
-    video: Yup.string().url().required("Required"),
+    image: Yup.string().url().required("Required"),
+    video: Yup.string().url(),
   });
 
   return (
@@ -50,59 +64,95 @@ const MovieForm = (props: any) => {
           <Typography variant="h6" component="h2">
             Movie name
           </Typography>
-          <Field name="name" type="text" placeholder="Enter movie" />
-          <ErrorMessage
+          <Field
             name="name"
-            className="d-block invalid-feedback"
-            component="span"
+            type="text"
+            placeholder="Enter movie"
+            style={styles}
           />
+          <div style={stylesError}>
+            <ErrorMessage
+              name="name"
+              className="d-block invalid-feedback"
+              component="span"
+            />
+          </div>
           <br />
           <Typography variant="h6" component="h2">
             Price
           </Typography>
-          <Field name="price" type="number" placeholder="Enter rating" />
-          <ErrorMessage
+          <Field
             name="price"
-            className="d-block invalid-feedback"
-            component="span"
+            type="number"
+            placeholder="Enter rating"
+            style={styles}
           />
+          <div style={stylesError}>
+            <ErrorMessage
+              name="price"
+              className="d-block invalid-feedback"
+              component="span"
+            />
+          </div>
           <br />
           <Typography variant="h6" component="h2">
             Gerne
           </Typography>
-          <Field name="gerne" as="select" placeholder="Choose gerne">
+          <Field
+            name="gerne"
+            as="select"
+            placeholder="Choose gerne"
+            style={styles}
+          >
             <option value="">Please choose a gerne</option>
             <option value="action">Action</option>
             <option value="comedy">Comedy</option>
             <option value="sci-fi">Sci-fi</option>
             <option value="animated">Animated</option>
             <option value="thriller">Thriller</option>
+            <option value="drama">Drama</option>
           </Field>
-          <ErrorMessage
-            name="gerne"
-            className="d-block invalid-feedback"
-            component="span"
-          />
+          <div style={stylesError}>
+            <ErrorMessage
+              name="gerne"
+              className="d-block invalid-feedback"
+              component="span"
+            />
+          </div>
           <br />
           <Typography variant="h6" component="h2">
             Year
           </Typography>
-          <Field name="year" type="text" placeholder="Enter year" />
-          <ErrorMessage
+          <Field
             name="year"
-            className="d-block invalid-feedback"
-            component="span"
+            type="text"
+            placeholder="Enter year"
+            style={styles}
           />
+          <div style={stylesError}>
+            <ErrorMessage
+              name="year"
+              className="d-block invalid-feedback"
+              component="span"
+            />
+          </div>
           <br />
           <Typography variant="h6" component="h2">
             Rating
           </Typography>
-          <Field name="rating" type="number" placeholder="Enter rating" />
-          <ErrorMessage
+          <Field
             name="rating"
-            className="d-block invalid-feedback"
-            component="span"
+            type="number"
+            placeholder="Enter rating"
+            style={styles}
           />
+          <div style={stylesError}>
+            <ErrorMessage
+              name="rating"
+              className="d-block invalid-feedback"
+              component="span"
+            />
+          </div>
           <br />
           <Typography variant="h6" component="h2">
             Description
@@ -111,32 +161,49 @@ const MovieForm = (props: any) => {
             name="description"
             type="text"
             placeholder="Enter description"
+            style={styles}
           />
-          <ErrorMessage
-            name="description"
-            className="d-block invalid-feedback"
-            component="span"
-          />
+          <div style={stylesError}>
+            <ErrorMessage
+              name="description"
+              className="d-block invalid-feedback"
+              component="span"
+            />
+          </div>
           <br />
           <Typography variant="h6" component="h2">
             Image
           </Typography>
-          <Field name="image" type="text" placeholder="Enter image url" />
-          <ErrorMessage
+          <Field
             name="image"
-            className="d-block invalid-feedback"
-            component="span"
+            type="text"
+            placeholder="Enter image url"
+            style={styles}
           />
+          <div style={stylesError}>
+            <ErrorMessage
+              name="image"
+              className="d-block invalid-feedback"
+              component="span"
+            />
+          </div>
           <br />
           <Typography variant="h6" component="h2">
             Video
           </Typography>
-          <Field name="video" type="text" placeholder="Enter video url" />
-          <ErrorMessage
+          <Field
             name="video"
-            className="d-block invalid-feedback"
-            component="span"
+            type="text"
+            placeholder="Enter video url"
+            style={styles}
           />
+          <div style={stylesError}>
+            <ErrorMessage
+              name="video"
+              className="d-block invalid-feedback"
+              component="span"
+            />
+          </div>
           <br />
           <br />
           <Button variant="contained" type="submit">

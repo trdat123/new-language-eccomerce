@@ -38,7 +38,7 @@ const MovieList = () => {
               <TableRow>
                 <TableCell align="left">Name</TableCell>
                 <TableCell align="center">Year</TableCell>
-                <TableCell align="center">Rating</TableCell>
+                <TableCell align="center">Price</TableCell>
                 <TableCell align="center">Action</TableCell>
               </TableRow>
             </TableHead>

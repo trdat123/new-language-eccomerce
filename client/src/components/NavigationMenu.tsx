@@ -18,7 +18,6 @@ const pages = [
   { key: 1, name: "Home", route: "home" },
   { key: 2, name: "Create", route: "create" },
   { key: 3, name: "List", route: "list" },
-  { key: 4, name: "Login", route: "login" },
 ];
 
 const NavigationMenu = () => {
