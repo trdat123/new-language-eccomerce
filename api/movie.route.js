@@ -11,6 +11,7 @@ router.post("/create_movie", (req, res, next) => {
     if (error) {
       return next(error);
     } else {
+      res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
       res.json(data);
     }
   });
