@@ -41,11 +41,7 @@ const EditMovie = (props: any) => {
   // Load data from server and reinitialize movie form
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_PORT
-        }/movies/update_movie/${id}`
-      )
+      .get(`http://localhost:${import.meta.env.VITE_BACKEND_PORT}/movies/update_movie/${id}`)
       .then((res) => {
         const { name, price, gerne, year, rating, description, image, video } =
           res.data;
