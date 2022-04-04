@@ -6,11 +6,15 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 
 const MovieTableRow = (props: any) => {
-  const { _id, name, year, rating } = props.obj;
+  const { _id, name, year, price } = props.obj;
 
   const deleteMovie = () => {
     axios
-      .delete(`http://localhost:${import.meta.env.VITE_BACKEND_PORT}/movies/delete_movie/` + _id)
+      .delete(
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_PORT
+        }/movies/delete_movie/` + _id
+      )
       .then((res) => {
         if (res.status === 200) {
           alert("movie successfully deleted");
@@ -24,7 +28,7 @@ const MovieTableRow = (props: any) => {
     <TableRow>
       <TableCell align="left">{name}</TableCell>
       <TableCell align="center">{year}</TableCell>
-      <TableCell align="center">{rating}</TableCell>
+      <TableCell align="center">{price}</TableCell>
       <TableCell align="center">
         <Button variant="outlined">
           <Link to={"/edit/" + _id} style={{ textDecoration: "none" }}>

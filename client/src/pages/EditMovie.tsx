@@ -23,7 +23,12 @@ const EditMovie = (props: any) => {
   //onSubmit handler
   const onSubmit = (movieObject: any) => {
     axios
-      .put(`http://localhost:${import.meta.env.VITE_BACKEND_PORT}/movies/update_movie/${id}`, movieObject)
+      .put(
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_PORT
+        }/movies/update_movie/${id}`,
+        movieObject
+      )
       .then((res) => {
         if (res.status === 200) {
           alert("Movie successfully updated");
@@ -38,7 +43,8 @@ const EditMovie = (props: any) => {
     axios
       .get(`http://localhost:${import.meta.env.VITE_BACKEND_PORT}/movies/update_movie/${id}`)
       .then((res) => {
-        const { name, price, gerne, year, rating, description, image, video } = res.data;
+        const { name, price, gerne, year, rating, description, image, video } =
+          res.data;
         console.log(res.data);
         setFormValues({
           name,
@@ -56,10 +62,19 @@ const EditMovie = (props: any) => {
   // Return movie form
   return (
     <React.Fragment>
-      <Typography variant="h3" component="h2" align="center" sx={{ mt: 4, mb: 1 }}>
+      <Typography
+        variant="h3"
+        component="h2"
+        align="center"
+        sx={{ mt: 4, mb: 1 }}
+      >
         Update Movie : {formValues.name}
       </Typography>
-      <MovieForm initialValues={formValues} onSubmit={onSubmit} enableReinitialize>
+      <MovieForm
+        initialValues={formValues}
+        onSubmit={onSubmit}
+        enableReinitialize
+      >
         Update Movie
       </MovieForm>
     </React.Fragment>

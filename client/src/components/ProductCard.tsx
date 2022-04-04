@@ -59,8 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const ProductCard = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearhTerm] = useState("");
-  const handleClick = () => {};
-
+  const [cart, setCart] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:${import.meta.env.VITE_BACKEND_PORT}/movies/`)
       .then((res) => res.json())
@@ -85,31 +84,61 @@ const ProductCard = () => {
       </Paper>
 
       <Grid container spacing={3}>
-        {movies.map((movie, index) => (
-          <Grid item md={3} xs={6} key={index} style={{ paddingBottom: 16 }}>
-            <Card sx={{ maxWidth: 260 }}>
-              <CardActionArea>
-                <CardMedia component="img" height="360" image={movie["image"]} alt="random card" />
-                <CardContent>
-                  <Typography variant="h6">{movie["name"]}</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {movie["price"]} VND
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions style={{ display: "flex", justifyContent: "center" }}>
-                <Button size="small" color="primary" variant="contained" onClick={handleClick}>
-                  <Link to={`/detail/${movie["_id"]}`} style={{ textDecoration: "none", color: "white" }}>
-                    <span>View</span>
+        {movies
+          .filter((movie: any) => {
+            if (searchTerm == "") {
+              return movie;
+            } else if (movie["name"].toLowerCase().includes(searchTerm)) {
+              return movie;
+            }
+          })
+          .map((movie, index) => (
+            <Grid item md={3} xs={6} key={index} style={{ paddingBottom: 16 }}>
+              <Card sx={{ maxWidth: 260 }}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="360"
+                    image={movie["image"]}
+                    alt="random card"
+                  />
+                  <CardContent>
+                    <Typography variant="h6">{movie["name"]}</Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {movie["price"]} VND
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Link
+                    to={`/detail/${movie["_id"]}`}
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                      marginRight: "5px",
+                    }}
+                  >
+                    <Button size="small" color="primary" variant="contained">
+                      <span>View</span>
+                    </Button>
                   </Link>
-                </Button>
-                <Button size="small" color="primary" variant="contained" onClick={handleClick}>
-                  Add to cart
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
+                  <Button
+                    size="small"
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
+                      setCart([...cart, movie]);
+                      console.log(cart);
+                    }}
+                  >
+                    Add to cart
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
       </Grid>
     </React.Fragment>
   );
